@@ -1,0 +1,95 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FitMeIn</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <!--link rel="stylesheet" href="foundation-icons/foundation-icons.css" /-->
+      <link rel="stylesheet" href="css/example.css" />
+    <!--script src="js/vendor/modernizr.js"></script>
+    <script src="js/fmi.js"></script>
+   <script type="text/javascript" src="js/upclick-min.js"></script-->
+
+    <!--All Rights Reserved: FitMeIn-->
+    <!--DD-->
+    
+  </head>
+  <body>
+    <div class = "heading"> <!--heading div-->
+        <div id = "logo">
+            <h3>FitMeIn</h3> 
+            <h4>Fit your clothes. Fit your style.</h4>
+            <!--img src = "img/p10-1.jpg"-->
+        </div>
+
+        
+      <div id = "upload-button" class ="small round button" >
+         <input type="file" id="files"  name="files[]" class="hidden"/>
+          <label for="files"><h5>Upload Picture</h5></label>
+      </div>
+
+        <div id = "instructions">
+        <p>Please upload your upper body picture with a reference item placed in front of you. We recommend a CD.</p>
+        <a href ="javascript:samplePic('model.jpg')">Click here to see a sample picture</a>
+      </div>
+
+      <output id="list"></output>
+      <!--div class = "photo-container" -->
+        <!--img src = "img/model.jpg"-->
+      <!--/div-->
+      </div>
+
+
+
+<!--JavaScript functions start here!!!!-->
+      <script>
+    function samplePic(img)
+  {
+           var path = "img/"
+
+           window.open(path+img,"mywin","menubar=0,resizable=0,width=200,height=200")
+    }
+
+    function test()
+    {
+
+    if (window.File && window.FileReader && window.FileList && window.Blob) 
+    {
+      alert('OK!');
+    } 
+    else 
+    {
+      alert('The File APIs are not supported in this browser.');
+    } 
+  }
+
+    function FileUpload(evt) {
+    var files = evt.target.files; // FileList object
+
+    for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="photo-container" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+          document.getElementById('list').insertBefore(span, null);
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+  document.getElementById('files').addEventListener('change', FileUpload, false);
+  </script>
