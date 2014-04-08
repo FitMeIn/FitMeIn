@@ -13,14 +13,13 @@
 	margin-left: 110px;
 }
 
-
 #upload-button
 {
 background: #ee7d7d;
-margin: 34px -146px 11px 44px;
-margin-left: 108px;
+margin-left: 0%;
 border-radius: 2px;
 height: 1px;
+margin-top: 2%;
 }
 
 
@@ -63,7 +62,7 @@ height: 300px;
 {
 
 margin-top: 9px;
-margin-left: 105px;
+margin-left: -12px;
 
 }
 
@@ -89,12 +88,15 @@ h3
 font-size: 27px;
 font-style: italic;
 color: #ffffff;
+margin-left: -34%;
 }
+
 h4
 {
 font-size: 15px;
 color: #EE7D7D;
 margin-top: -14px;
+margin-left: -25%;
 }
 
 h5
@@ -126,5 +128,23 @@ p
 	margin-top: -7px;
 	color: #181818;
 	font-weight: bold;
+	height: 3px;
 
+}
+
+
+body{text-align: center;background: #f2f6f8;}
+.img{position:absolute;z-index:1;}
+
+#canvas 
+{
+	width:300px; 
+	height:400px;
+	margin: 0 auto; 
+    position:relative; 
+    border:5px solid black; 
+    border-radius: 10px; 
+    box-shadow: 0 5px 50px #333;
+    /*background-image: url('../img/model.JPG'); 	set backgroud*/
+    background-repeat: no-repeat; 			/*background no repeat*/
 }
