@@ -6,15 +6,15 @@
     <title>FitMeIn</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <!--link rel="stylesheet" href="foundation-icons/foundation-icons.css" /-->
-      <link rel="stylesheet" href="css/example.css" />
+    <link rel="stylesheet" href="css/example.css" />
     <!--script src="js/vendor/modernizr.js"></script>
     <script src="js/fmi.js"></script>
-   <script type="text/javascript" src="js/upclick-min.js"></script-->
-
+	<script type="text/javascript" src="js/upclick-min.js"></script-->
     <!--All Rights Reserved: FitMeIn-->
     <!--DD-->
     
   </head>
+
   <body>
     <div class = "heading"> <!--heading div-->
         <div id = "logo">
@@ -22,74 +22,168 @@
             <h4>Fit your clothes. Fit your style.</h4>
             <!--img src = "img/p10-1.jpg"-->
         </div>
-
         
-      <div id = "upload-button" class ="small round button" >
-         <input type="file" id="files"  name="files[]" class="hidden"/>
+		<div id = "upload-button" class ="small round button" >
+		  <input type="file" id="files"  name="files[]" class="hidden"/>
           <label for="files"><h5>Upload Picture</h5></label>
-      </div>
-
+		</div>
+		
         <div id = "instructions">
         <p>Please upload your upper body picture with a reference item placed in front of you. We recommend a CD.</p>
         <a href ="javascript:samplePic('model.jpg')">Click here to see a sample picture</a>
-      </div>
+		</div><br>
 
-      <output id="list"></output>
-      <!--div class = "photo-container" -->
+		<output id="list"></output>
+		<!--div class = "photo-container" -->
         <!--img src = "img/model.jpg"-->
-      <!--/div-->
-      </div>
-
-
+		<!--/div-->	
+		
+		<div id="container">
+			<canvas id="canvas" width="300" height="400" /></canvas>
+		</div><br>
+		
+		<p id="cd">Length of reference: 0</p>
+		<p id="shoulder_width">Shoulder width: 0</p>
+		<p id="body_length">Body length: 0</p>
+		<p id="arm_length">Arm length: 0</p>
+    </div>
 
 <!--JavaScript functions start here!!!!-->
-      <script>
-    function samplePic(img)
-  {
-           var path = "img/"
+    <script>
+	// Draw lines on canvas start here
+	var clicks = 0;
+	var lastClick = [0, 0];
+	// measurements variables
+	var measure_flag = 0;
+	var length = 0;
+	
+	var cd_length = 120; 		//milli-meters 
+	var shoulder_length = 0;
+	var body_length = 0;
+	var arm_length = 0;
+	
+	var cd_pixel_length = 0;
+	var shoulder_pixel_length = 0;
+	var body_pixel_length = 0;
+	var arm_pixel_length = 0;
+	
+	document.getElementById('canvas').addEventListener('click', drawLine, false);
+	function getCursorPosition(e) 
+	{
+		var x;
+		var y;
+		if (e.pageX != undefined && e.pageY != undefined) 
+		{
+			x = e.pageX;
+			y = e.pageY;
+		} 
+		else 
+		{
+			x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+			y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+		}    
+		return [x, y];
+	}
 
-           window.open(path+img,"mywin","menubar=0,resizable=0,width=200,height=200")
+	function drawLine(e) 
+	{
+		context = this.getContext('2d');
+		x = getCursorPosition(e)[0] - this.offsetLeft;
+		y = getCursorPosition(e)[1] - this.offsetTop;
+		if (clicks != 1) 
+		{
+			clicks++;
+		} 
+		else 
+		{
+			context.beginPath();
+			context.moveTo(lastClick[0], lastClick[1]);
+			context.lineTo(x, y, 6);
+			context.strokeStyle = '#FFFF00';
+			context.lineWidth = 10;
+			context.stroke();       
+			clicks = 0;
+			length = Math.sqrt((x-lastClick[0])*(x-lastClick[0]) + (y-lastClick[1]) * (y-lastClick[1]));
+			//window.alert("YAAAAA"); //' <br>' +cd_length);
+			switch (measure_flag)
+			{
+				case 0: 
+					cd_pixel_length = length;
+					document.getElementById("cd").innerHTML = "length of reference: " + cd_length + " mm";
+					measure_flag++;
+					break;
+				case 1:
+					shoulder_pixel_length = length;
+					shoulder_length = shoulder_pixel_length * cd_length / cd_pixel_length;
+					document.getElementById("shoulder_width").innerHTML = "Shoulder width: " + shoulder_length + " mm";
+					measure_flag++;
+					break;
+				case 2:
+					body_pixel_length = length;
+					body_length = body_pixel_length * cd_length / cd_pixel_length;
+					document.getElementById("body_length").innerHTML = "Body length: " + body_length + " mm";
+					measure_flag++;
+					break;
+				case 3:
+					arm_pixel_length = length;
+					arm_length = arm_pixel_length * cd_length / cd_pixel_length;
+					document.getElementById("arm_length").innerHTML = "Arm length:: " + arm_length + " mm";
+					measure_flag++;
+					break;
+			}
+		}
+		lastClick = [x, y];
+	};
+	
+	
+	// function of uploading picture ; function of showing sample picture
+    function samplePic(img)
+	{
+        var path = "img/"
+        window.open(path+img,"mywin","menubar=0,resizable=0,width=200,height=200")
     }
 
     function test()
     {
+		if (window.File && window.FileReader && window.FileList && window.Blob) 
+		{
+			alert('OK!');
+		}	 
+		else 
+		{
+			alert('The File APIs are not supported in this browser.');
+		} 
+	}
 
-    if (window.File && window.FileReader && window.FileList && window.Blob) 
-    {
-      alert('OK!');
-    } 
-    else 
-    {
-      alert('The File APIs are not supported in this browser.');
-    } 
-  }
-
-    function FileUpload(evt) {
-    var files = evt.target.files; // FileList object
-
-    for (var i = 0, f; f = files[i]; i++) {
-
-      // Only process image files.
-      if (!f.type.match('image.*')) {
-        continue;
-      }
-
-      var reader = new FileReader();
-
-      // Closure to capture the file information
-      reader.onload = (function(theFile) {
-        return function(e) {
-          // Render thumbnail.
-          var span = document.createElement('span');
-          span.innerHTML = ['<img class="photo-container" src="', e.target.result,
-                            '" title="', escape(theFile.name), '"/>'].join('');
-          document.getElementById('list').insertBefore(span, null);
-        };
-      })(f);
-
-      // Read in the image file as a data URL.
-      reader.readAsDataURL(f);
+    function FileUpload(evt) 
+	{
+		var files = evt.target.files; // FileList object
+		for (var i = 0, f; f = files[i]; i++) {
+		// Only process image files.
+		if (!f.type.match('image.*')) 
+		{
+			continue;
+		}
+		var reader = new FileReader();
+		// Closure to capture the file information
+		reader.onload = (function(theFile) 
+		{
+			return function(e) 
+			{
+				// Render thumbnail.
+				var span = document.createElement('span');
+				//span.innerHTML = ['<img class="photo-container" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+				//document.getElementById('list').insertBefore(span, null);
+				// replace the css statements in canvas
+				document.getElementById("canvas").innerHTML = ['<style type="text/css">#canvas{background-image: url(\'', e.target.result, '\');}</style>'].join('');
+			};
+		})(f);
+		// Read in the image file as a data URL.
+		reader.readAsDataURL(f);
     }
   }
   document.getElementById('files').addEventListener('change', FileUpload, false);
+
   </script>
+  </body>
+</html>
