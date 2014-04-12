@@ -1,3 +1,4 @@
+
 .heading
 {
 	width: 1280px;
@@ -16,12 +17,40 @@
 #upload-button
 {
 background: #ee7d7d;
-margin-left: 0%;
 border-radius: 2px;
 height: 1px;
 margin-top: 2%;
+margin-left: 48%;
 }
 
+.size-button
+{
+background: #ee7d7d;
+border-radius: 2px;
+height: 1px;
+margin-top: 2%;
+margin-left: 0%;
+width:32px;
+}
+
+.button.tiny
+{
+width: 2px;
+
+}
+
+#size-panel
+{
+border-style: solid;
+border-width: 1px;
+width: 29%;
+background: #807A7A;
+/* margin-right: 26px; */
+margin-left: 598px;
+height: 300px;
+margin-top: 78px;
+display:none;
+}
 
 input[type="file"]
 {
@@ -47,25 +76,110 @@ textarea{
 
 }
 
-.photo-container
+#photo-container
 {
 
-background: #f2f2f2;
 width: 247px;
 margin-top: 11px;
-margin-left: 103px;
+margin-left: 54%;
 height: 300px;
 
+}
+
+#measurement-body
+{
+
+margin-top: 100px;
+margin-left: 53%;
+
+}
+
+#clothes-container
+{
+border-style: solid;
+border-width: 1px;
+width: 54%;
+/* height: 398%; */
+float: left;
+height: auto;
+margin-top: -5%;
+}
+
+#clothes-type
+{
+margin-left: 1%;
+float: left;
+margin-top: -92px;
 }
 
 #instructions
 {
 
 margin-top: 9px;
-margin-left: -12px;
+margin-left: 49%;
 
 }
 
+
+ul.clothes-img-list
+{
+	list-style: none;
+	float: left;
+	margin: 21px 5px 29px 34px;
+}
+ul.clothes-img-list li 
+{
+	display: inline;
+}
+
+ul.clothes-img-list-2
+{
+	list-style: none;
+	float: left;
+	margin: 21px 5px 29px 34px;
+}
+ul.clothes-img-list-2 li 
+{
+	display: inline;
+}
+
+
+ul.size-list
+{
+	list-style: none;
+	float: left;
+	margin-top: 213px;
+	margin-left: -455px;
+}
+ul.size-list li 
+{
+	display: inline;
+}
+
+ul.size-list-2
+{
+	list-style: none;
+	float: left;
+	margin-top: 213px;
+	margin-left: -281px;
+}
+ul.size-list-2 li 
+{
+	display: inline;
+}
+
+
+ul.size-list-3
+{
+	list-style: none;
+	float: left;
+	margin-top: 213px;
+	margin-left: -113px;
+}
+ul.size-list-3 li 
+{
+	display: inline;
+}
 
 /*MOBILE CSS*/
 #trending-mobile {
@@ -89,6 +203,7 @@ font-size: 27px;
 font-style: italic;
 color: #ffffff;
 margin-left: -34%;
+margin-left: -98%;
 }
 
 h4
@@ -96,7 +211,7 @@ h4
 font-size: 15px;
 color: #EE7D7D;
 margin-top: -14px;
-margin-left: -25%;
+margin-left: -89%;
 }
 
 h5
@@ -129,12 +244,64 @@ p
 	color: #181818;
 	font-weight: bold;
 	height: 3px;
+}
+p1
+{
+	font-size: 12px;
+	margin-top: -7px;
+	color: #181818;
+	font-weight: bold;
+	height: 3px;
+}
+p2
+{
+	font-size: 12px;
+	margin-top: -7px;
+	color: #181818;
+	font-weight: bold;
+	height: 3px;
+	margin-left: 59px;
+}
+p3
+{
+	font-size: 12px;
+	margin-top: -7px;
+	color: #181818;
+	font-weight: bold;
+	height: 3px;
+	margin-left: 29px;
+}
+p4
+{
+	font-size: 12px;
+	margin-top: -7px;
+	color: #181818;
+	font-weight: bold;
+	height: 3px;
+	margin-left: -40%;
+	text-align: center;
+}
+p5
+{
+	font-size: 12px;
+	margin-top: -7px;
+	color: #181818;
+	font-weight: bold;
+	height: 3px;
+	margin-left: 3%;
+	text-align: center;
+}
+}
 
+img
+{
+	margin-left: 15px;
 }
 
 
-body{text-align: center;background: #f2f6f8;}
-.img{position:absolute;z-index:1;}
+body{text-align: center;background: #FFFFFF;}
+.img{position:absolute;z-index:1;
+}
 
 #canvas 
 {
@@ -147,4 +314,5 @@ body{text-align: center;background: #f2f6f8;}
     box-shadow: 0 5px 50px #333;
     /*background-image: url('../img/model.JPG'); 	set backgroud*/
     background-repeat: no-repeat; 			/*background no repeat*/
+    margin-left: 49%;
 }
