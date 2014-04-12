@@ -29,7 +29,9 @@
 		</div>
 		
         <div id = "instructions">
-        <p>Please upload your upper body picture with a reference item placed in front of you. We recommend a CD.</p>
+        <p>Upload your upper body picture with a reference item placed in front of you. </br>
+        	We recommend a CD.</p>
+        </br>
         <a href ="javascript:samplePic('model.jpg')">Click here to see a sample picture</a>
 		</div><br>
 
@@ -37,15 +39,75 @@
 		<!--div class = "photo-container" -->
         <!--img src = "img/model.jpg"-->
 		<!--/div-->	
-		
-		<div id="container">
+
+		<div id ="clothes-type">
+			<p>Men's Dress Shirt</p>
+		</div>
+
+		<!--DIV for clothes canvas-->
+		<div id = "clothes-container">
+			<ul class = "clothes-img-list">
+  					<li> <img src = "img/clothes1.jpg"></li>
+  					<li> <img src = "img/clothes2.jpg"></li>
+  					<li> <img src = "img/clothes3.jpg"></li>
+  			</ul>
+  		<ul class = "size-list"> 
+  			    <li><a href="#size-panel" id="button_xs">XS</a></li>	
+  				<li><a href="#size-panel" id="button_s">S</a></li>
+  				<li><a href="#size-panel" id="button_m">M</a></li>
+  				<li><a href="#size-panel" id="button_l">L</a></li>
+  		</ul>	
+  		<ul class = "size-list-2"> 	
+  				<li><a href="#size-panel" id="button_xs">XS</a></li>	
+  				<li><a href="#size-panel" id="button_s">S</a></li>
+  				<li><a href="#size-panel" id="button_m">M</a></li>
+  				<li><a href="#size-panel" id="button_l">L</a></li>
+  		</ul>
+  		<ul class = "size-list-3"> 		
+  				<li><a href="#size-panel" id="button_xs">XS</a></li>	
+  				<li><a href="#size-panel" id="button_s">S</a></li>
+  				<li><a href="#size-panel" id="button_m">M</a></li>
+  				<li><a href="#size-panel" id="button_l">L</a></li>
+  		</ul>
+
+  			<ul class = "clothes-img-list-2">
+  					<li> <img src = "img/clothes4.jpg"></li>
+  					<li> <img src = "img/clothes5.jpg"></li>
+  					<li> <img src = "img/clothes6.jpg"></li>
+  			</ul>
+
+  		<div id= "size-panel">
+			<p1>Suggested Size: </p1>
+		</br>
+		</br>
+			<p2>Clothes</p2>
+			<p3>Body</p3>
+		</br>
+			<p4>Shoulder:</p4>
+			<p5 id = "shoulder-width"></p5>
+		</br>
+			<p4>Body:</p4>
+			<p5 id = "body-width"></p5>
+		</br>
+			<p4>Arm:</p4>
+			<p5 id = "arm-width"></p5>
+		</div>
+
+		</div>
+
+
+		<!--DIV for photo canvas-->
+		<div id="photo-container">
 			<canvas id="canvas" width="300" height="400" /></canvas>
 		</div><br>
 		
-		<p id="cd">Length of reference: 0</p>
-		<p id="shoulder_width">Shoulder width: 0</p>
-		<p id="body_length">Body length: 0</p>
-		<p id="arm_length">Arm length: 0</p>
+		<!--DIV for measurements-->
+		<div id = "measurement-body">
+			<p id="cd">Length of reference: 0</p>
+			<p id="shoulder_width">Shoulder width: 0</p>
+			<p id="body_length">Body length: 0</p>
+			<p id="arm_length">Arm length: 0</p>
+		</div>
     </div>
 
 <!--JavaScript functions start here!!!!-->
@@ -57,7 +119,7 @@
 	var measure_flag = 0;
 	var length = 0;
 	
-	var cd_length = 120; 		//milli-meters 
+	var cd_length = 4.724; 		//milli-meters 
 	var shoulder_length = 0;
 	var body_length = 0;
 	var arm_length = 0;
@@ -67,6 +129,71 @@
 	var body_pixel_length = 0;
 	var arm_pixel_length = 0;
 	
+	//additional variables
+	//changes start here
+	var button_xs = document.getElementById('button_xs');
+	var button_s = document.getElementById('button_s');
+	var button_m = document.getElementById('button_m');
+	var button_l = document.getElementById('button_l');
+
+	button_xs.onclick = function()
+	{
+		 var div = document.getElementById('size-panel');
+    	if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'block';
+        document.getElementById("shoulder-width").innerHTML = "<p5>" + "16.5" + "'" +"</p5>" ;
+        document.getElementById("body-width").innerHTML = "<p5>" + "26.25" + "'"+"</p5>" ;
+        document.getElementById("arm-width").innerHTML = "<p5>" + "25.25" + "'"+"</p5>" ;
+    }
+	};
+
+	button_s.onclick = function()
+	{
+		 var div = document.getElementById('size-panel');
+    	if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'block';
+         document.getElementById("shoulder-width").innerHTML ="<p5>" + "17" + "'"+"</p5>" ;
+        document.getElementById("body-width").innerHTML ="<p5>" + "27" + "'"+"</p5>" ;
+        document.getElementById("arm-width").innerHTML = "<p5>" + "25.5" + "'"+"</p5>" ;
+    }
+	};
+
+	button_m.onclick = function()
+	{
+		 var div = document.getElementById('size-panel');
+    	if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'block';
+        document.getElementById("shoulder-width").innerHTML = "<p5>" +  "17.5" + "'" +"</p5>" ;
+        document.getElementById("body-width").innerHTML = "<p5>" + "27.5" + "'" +"</p5>" ;
+        document.getElementById("arm-width").innerHTML = "<p5>"  + "25.75" + "'" +"</p5>" ;
+    }
+	};
+
+	button_l.onclick = function()
+	{
+		 var div = document.getElementById('size-panel');
+    	if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'block';
+        document.getElementById("shoulder-width").innerHTML ="<p5>" + "18.25" + "'" + "</p5>";
+        document.getElementById("body-width").innerHTML = "<p5>" + "28.25" + "'" +"</p5>";
+        document.getElementById("arm-width").innerHTML = "<p5>" + "26" + "'" + "</p5>" ;
+    }
+	};
+
+	//changes end here
+
 	document.getElementById('canvas').addEventListener('click', drawLine, false);
 	function getCursorPosition(e) 
 	{
@@ -84,6 +211,7 @@
 		}    
 		return [x, y];
 	}
+
 
 	function drawLine(e) 
 	{
@@ -109,25 +237,25 @@
 			{
 				case 0: 
 					cd_pixel_length = length;
-					document.getElementById("cd").innerHTML = "length of reference: " + cd_length + " mm";
+					document.getElementById("cd").innerHTML = "length of reference: " + cd_length + " inch";
 					measure_flag++;
 					break;
 				case 1:
 					shoulder_pixel_length = length;
-					shoulder_length = shoulder_pixel_length * cd_length / cd_pixel_length;
-					document.getElementById("shoulder_width").innerHTML = "Shoulder width: " + shoulder_length + " mm";
+					shoulder_length = (shoulder_pixel_length * cd_length / cd_pixel_length).toFixed(2);
+					document.getElementById("shoulder_width").innerHTML = "Shoulder width: " + shoulder_length + " inch";
 					measure_flag++;
 					break;
 				case 2:
 					body_pixel_length = length;
 					body_length = body_pixel_length * cd_length / cd_pixel_length;
-					document.getElementById("body_length").innerHTML = "Body length: " + body_length + " mm";
+					document.getElementById("body_length").innerHTML = "Body length: " + body_length + " inch";
 					measure_flag++;
 					break;
 				case 3:
 					arm_pixel_length = length;
 					arm_length = arm_pixel_length * cd_length / cd_pixel_length;
-					document.getElementById("arm_length").innerHTML = "Arm length:: " + arm_length + " mm";
+					document.getElementById("arm_length").innerHTML = "Arm length:: " + arm_length + " inch";
 					measure_flag++;
 					break;
 			}
